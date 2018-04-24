@@ -28,6 +28,12 @@ export class SongsComponent implements OnInit {
   }
 
   getSongs(): void {
-    this.songs = this.songService.getSongs();
+    // assigns an array of songs to the component's songs property. (synchronous)
+    // this.songs = this.songService.getSongs();
+
+    // waits for the Observable to emit the array of songs.
+    // Then passes the emitted array to the callback, which sets the component's songs property. (asynchronous)
+    this.songService.getSongs()
+        .subscribe(songs => this.songs = songs);
   }
 }
