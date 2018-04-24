@@ -2,12 +2,7 @@
   <h1>{{ title }}</h1>
   <img width="200" alt="Revv52 Logo" src="/assets/revv52-logo.jpg">
 </div>
-<div style="text-align:center">
-  <nav>
-      <a routerLink="/dashboard">Dashboard</a>
-      <a routerLink="/songs">Songs from the upcoming show:</a>
-    </nav>
-</div>
+
 <div>
   <div>
     ...
@@ -26,7 +21,12 @@
 </ul>
 <div>
   <!-- <songs></songs> -->
-
+<div style="text-align:center">
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/songs">Songs from the upcoming show:</a>
+  </nav>
+</div>
   <router-outlet></router-outlet>
   <messages></messages>
 </div>
