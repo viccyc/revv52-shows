@@ -11,6 +11,12 @@ export class SongsComponent implements OnInit {
 
   songs = SONGS;
 
+  selectedSong: Song;
+
+  onSelect(song: Song): void {
+    this.selectedSong = song;
+  }
+
   constructor() { }
 
   ngOnInit() {
