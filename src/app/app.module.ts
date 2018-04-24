@@ -10,6 +10,7 @@ import { SongDetailComponent } from './components/song-detail/song-detail.compon
 import { SongService } from './services/song/song.service';
 import { MessagesComponent } from './components/messages/messages.component';
 import { MessageService } from './services/messages/message.service';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MessageService } from './services/messages/message.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [
     SongService,
