@@ -1,4 +1,6 @@
-<h3>Song: {{song.name}}</h3>
-<h4>Details:</h4>
-<div><span>id: </span>{{song.id}}</div>
-<div><span>name: </span>{{song.name | uppercase }}</div>
+<ul class="songs">
+  <li *ngFor="let song of songs" (click)="onSelect(song)">
+    <span class="badge">{{song.id}}</span> {{song.name}}
+  </li>
+</ul>
+

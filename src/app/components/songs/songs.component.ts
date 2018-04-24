@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from './songs';
+import { SONGS } from '../../mock-songs';
 
 @Component({
   selector: 'songs',
@@ -8,11 +9,8 @@ import { Song } from './songs';
 })
 export class SongsComponent implements OnInit {
 
-  song: Song = {
-    id: 1,
-    name: 'Believer'
-  };
-  
+  songs = SONGS;
+
   constructor() { }
 
   ngOnInit() {
