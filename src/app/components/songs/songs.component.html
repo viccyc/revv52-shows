@@ -6,14 +6,5 @@
   </li>
 </ul>
 
-<div *ngIf="selectedSong">
-  <h3>{{ selectedSong.name | uppercase }} details:</h3>
-  <div>
-    <span>id: </span>{{ selectedSong.id }}
-  </div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="selectedSong.name" placeholder="name">
-    </label>
-  </div>
-</div>
+<!-- property binding to give the parent SongComponent control over the child SongDetailComponent. -->
+<song-detail [song]="selectedSong"></song-detail>
