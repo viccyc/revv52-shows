@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { SongsComponent } from './components/songs/songs.component';
 import { SongDetailComponent } from './components/song-detail/song-detail.component';
 
+import { SongService } from './services/song.service';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SongDetailComponent } from './components/song-detail/song-detail.compon
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    SongService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
