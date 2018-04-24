@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { SongsComponent } from './components/songs/songs.component';
 import { SongDetailComponent } from './components/song-detail/song-detail.component';
 
-import { SongService } from './services/song.service';
+import { SongService } from './services/song/song.service';
 
 
 @NgModule({
