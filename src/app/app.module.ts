@@ -11,6 +11,7 @@ import { SongService } from './services/song/song.service';
 import { MessagesComponent } from './components/messages/messages.component';
 import { MessageService } from './services/messages/message.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AppRoutingModule } from './/app-routing.module';
     AppComponent,
     SongsComponent,
     SongDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
