@@ -58,6 +58,16 @@ export class SongService {
     );
   }
 
+  deleteSong (song: Song | number): Observable<Song> {
+    const id = typeof song === 'number' ? song : song.id;
+    const url = `${this.songsUrl}/${id}`;
+
+    return this.http.delete<Song>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted song id=${id}`)),
+      catchError(this.handleError<Song>(`deletedSong`))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
