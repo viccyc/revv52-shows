@@ -8,6 +8,10 @@ import { Song } from '../../components/songs/songs';
 
 import { MessageService } from '../messages/message.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class SongService {
 
@@ -37,6 +41,13 @@ export class SongService {
     return this.http.get<Song>(url).pipe(
       tap(_ => this.log(`fetched song id=${id}`)),
       catchError(this.handleError<Song>(`getSong id=${id}`))
+    );
+  }
+
+  updateSong (song: Song): Observable<any> {
+    return this.http.put(this.songsUrl, song, httpOptions).pipe(
+      tap(_ => this.log(`updated song id=${song.id}`)),
+      catchError(this.handleError<any>('updateSong'))
     );
   }
 

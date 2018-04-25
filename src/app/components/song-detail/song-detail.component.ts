@@ -34,4 +34,9 @@ export class SongDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.songService.updateSong(this.song) 
+      .subscribe(() => this.goBack());
+  }
 }
