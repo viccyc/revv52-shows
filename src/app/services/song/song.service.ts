@@ -51,6 +51,13 @@ export class SongService {
     );
   }
 
+  addSong (song: Song): Observable<Song> {
+    return this.http.post<Song>(this.songsUrl, song, httpOptions).pipe(
+      tap((song: Song) => this.log(`added song w/ id=${song.id}`)),
+      catchError(this.handleError<Song>('addsong'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

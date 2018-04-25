@@ -24,4 +24,13 @@ export class SongsComponent implements OnInit {
     this.songService.getSongs()
         .subscribe(songs => this.songs = songs);
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.songService.addSong({ name } as Song)
+      .subscribe(song => {
+        this.songs.push(song);
+      });
+  }
 }
