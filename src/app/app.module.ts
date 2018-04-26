@@ -15,7 +15,10 @@ import { SongSearchComponent } from './components/song-search/song-search.compon
 
 import { SongService } from './services/song/song.service';
 import { MessageService } from './services/messages/message.service';
+import { LastfmApiService } from './services/lastfm-api/lastfm-api.service';
+import { environment } from '../environments/environment.local';
 
+console.log(environment["LAST_FM_API_KEY"]);
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { MessageService } from './services/messages/message.service';
   ],
   providers: [
     SongService,
-    MessageService
+    MessageService,
+    LastfmApiService
   ],
   bootstrap: [AppComponent]
 })

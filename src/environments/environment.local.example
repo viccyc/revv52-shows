@@ -1,0 +1,4 @@
+export const environment = {
+  production: false,
+  LAST_FM_API_KEY: "xxxxxxxxxxxxx"
+};
