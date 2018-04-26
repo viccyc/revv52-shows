@@ -14,19 +14,26 @@ const httpOptions = {
 
 @Injectable()
 export class SongService {
-
+  
   // typical "service-in-service" scenario: you inject the MessageService into the SongService which is injected into the SongComponent.
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
-  
-  // Log a SongService message with the MessageService
-  private log(message: string) {
-    this.messageService.add('SongService: ' + message);
-  }
-
-  private songsUrl = 'api/songs';
-
+    
+    // Log a SongService message with the MessageService
+    private log(message: string) {
+      this.messageService.add('SongService: ' + message);
+    }
+    
+    private songsUrl = 'api/songs';
+    
+    private handleError<T> (operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+        console.error(error);
+        this.log(`${operation} failed: ${error.message}`);
+        return of(result as T);
+      };
+    }
   // makes it asynchronous - returns an Observable that emits a single value, the array of mock songs when done 
   getSongs(): Observable<Song[]> {
     return this.http.get<Song[]>(this.songsUrl)
@@ -68,11 +75,14 @@ export class SongService {
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
+  searchSongs(term: string): Observable<Song[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Song[]>(`api/songs/?name=${term}`).pipe(
+      tap(_ => this.log(`found songs matching "${term}"`)),
+      catchError(this.handleError<Song[]>('searchSongs', []))
+    );
   }
+
 }

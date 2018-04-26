@@ -11,6 +11,7 @@ import { SongsComponent } from './components/songs/songs.component';
 import { SongDetailComponent } from './components/song-detail/song-detail.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SongSearchComponent } from './components/song-search/song-search.component';
 
 import { SongService } from './services/song/song.service';
 import { MessageService } from './services/messages/message.service';
@@ -22,7 +23,8 @@ import { MessageService } from './services/messages/message.service';
     SongsComponent,
     SongDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    SongSearchComponent
   ],
   imports: [
     BrowserModule,
