@@ -4,7 +4,9 @@
   <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
 
   <ul class="search-result">
-    <li *ngFor="let song of songs$ | async">
+      <!-- $ is a convention that indicates songs$ is an Observable, not an array. -->
+      <!-- The AsyncPipe subscribes to an Observable automatically- don't have to in component class. -->
+      <li *ngFor="let song of songs$ | async">
       <a routerLink="/detail/{{song.id}}">
         {{song.name}}
       </a>
