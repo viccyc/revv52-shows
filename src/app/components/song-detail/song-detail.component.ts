@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Song } from '../songs/songs';
 import { SongService } from '../../services/song/song.service';
 import { LastfmApiService } from '../../services/lastfm-api/lastfm-api.service';
+import { isArray } from 'util';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { LastfmApiService } from '../../services/lastfm-api/lastfm-api.service';
 export class SongDetailComponent implements OnInit {
   // @Input decorator to make the song property available for binding by the external SongComponent.
   @Input()song: Song;
+  trackMatches: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,7 @@ export class SongDetailComponent implements OnInit {
   }
 
   getTrackMatches(): void {
-    const tracks = this.lastfmApiService.getTrackMatches(this.song.name);
+    this.lastfmApiService.getTrackMatches(this.song.name)
   }
 
   goBack(): void {

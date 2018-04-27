@@ -11,6 +11,7 @@ const LAST_FM_API_KEY = environment["LAST_FM_API_KEY"];
 
 @Injectable()
 export class LastfmApiService {
+  trackMatches: any;
 
   constructor(
     private http: HttpClient,
@@ -37,7 +38,14 @@ export class LastfmApiService {
   
   getTrackMatches(name: String) {
     const url = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${name}&api_key=${LAST_FM_API_KEY}&format=json`;
-    this.http.get(url).subscribe(res => console.log(res));
+    // this.http.get(url).subscribe(res => console.log(res));
+    this.http.get(url)
+      .subscribe(res => {
+        this.trackMatches = res;
+        console.log("this.trackMatches: ", this.trackMatches);
+      }, err => {
+        console.log(err);
+      });
   }
 
 }

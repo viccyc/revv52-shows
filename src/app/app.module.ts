@@ -33,9 +33,6 @@ import { environment } from '../environments/environment.local';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // TODO: Remove this when a real server is ready to receive requests.
-    // HttpClientInMemoryWebApiModule.forRoot(
-      //   InMemoryDataService, { dataEncapsulation: false }
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 0, passThruUnknownUrl: true, dataEncapsulation: false}
     )
   ],
