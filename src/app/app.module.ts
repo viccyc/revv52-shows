@@ -18,7 +18,6 @@ import { MessageService } from './services/messages/message.service';
 import { LastfmApiService } from './services/lastfm-api/lastfm-api.service';
 import { environment } from '../environments/environment.local';
 
-console.log(environment["LAST_FM_API_KEY"]);
 
 @NgModule({
   declarations: [
@@ -35,8 +34,9 @@ console.log(environment["LAST_FM_API_KEY"]);
     AppRoutingModule,
     HttpClientModule,
     // TODO: Remove this when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+    // HttpClientInMemoryWebApiModule.forRoot(
+      //   InMemoryDataService, { dataEncapsulation: false }
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 0, passThruUnknownUrl: true, dataEncapsulation: false}
     )
   ],
   providers: [

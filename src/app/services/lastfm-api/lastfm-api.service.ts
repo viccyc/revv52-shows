@@ -26,12 +26,18 @@ export class LastfmApiService {
 // Search for a track by track name. Returns track matches sorted by relevance.
 // Example JSON URL:  /2.0/?method=track.search&track=Believe&api_key=YOUR_API_KEY&format=json
 
-  getTrackMatches(name: string): Observable<Song> {
-    const url = `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${name}&api_key=LAST_FM_API_KEY&format=json`;
-    return this.http.get<Song>(url)
-    // .pipe(
-    //   tap(_ => this.log(`fetched matching tracks name=${name}`)),
-    //   catchError(this.handleError<Song>(`getTrackMatches name=${name}`))
-    // );
+  // getTrackMatches(name: string): Observable<Song> {
+  //   const url = `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${name}&api_key=LAST_FM_API_KEY&format=json`;
+  //   return this.http.get<Song>(url)
+  //   // .pipe(
+  //   //   tap(_ => this.log(`fetched matching tracks name=${name}`)),
+  //   //   catchError(this.handleError<Song>(`getTrackMatches name=${name}`))
+  //   // );
+  // }
+  
+  getTrackMatches(name: String) {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${name}&api_key=${LAST_FM_API_KEY}&format=json`;
+    this.http.get(url).subscribe(res => console.log(res));
   }
+
 }

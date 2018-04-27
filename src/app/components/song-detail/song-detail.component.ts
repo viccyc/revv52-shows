@@ -30,15 +30,12 @@ export class SongDetailComponent implements OnInit {
 
   getSong(): void {
     const id = +this.route.snapshot.paramMap.get('id');  //+ converts string to number
-    const song = this.songService.getSong(id)
+    this.songService.getSong(id)
       .subscribe(song => this.song = song);
-    console.log("song: ", this.song);
   }
 
   getTrackMatches(): void {
-    // const tracks = this.lastfmApiService.getTrackMatches(this.song.name);
-    const tracks = this.lastfmApiService.getTrackMatches('Believer');
-    console.log("matching tracks: ", tracks);
+    const tracks = this.lastfmApiService.getTrackMatches(this.song.name);
   }
 
   goBack(): void {
