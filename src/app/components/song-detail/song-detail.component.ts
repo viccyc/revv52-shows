@@ -17,6 +17,7 @@ export class SongDetailComponent implements OnInit {
   // @Input decorator to make the song property available for binding by the external SongComponent.
   @Input()song: Song;
   trackMatches: any;
+  trackInfo: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,18 +29,36 @@ export class SongDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getSong();
     this.getTrackMatches();
+    this.getTrackInfo();
   }
-
+  
   getSong(): void {
     const id = +this.route.snapshot.paramMap.get('id');  //+ converts string to number
     this.songService.getSong(id)
-      .subscribe(song => this.song = song);
+    .subscribe(song => this.song = song);
   }
-
-  getTrackMatches(): void {
+  
+  getTrackMatches() {
     this.lastfmApiService.getTrackMatches(this.song.name)
+    .subscribe(matches => {
+      this.trackMatches = matches;
+      console.log("getTrackMatches this.trackMatches: :", this.trackMatches);
+    }, err => {
+      console.log(err);
+    });
   }
 
+  getTrackInfo() {
+    // this.lastfmApiService.getTrackInfo(this.trackMatches.name, this.trackMatches.artist)
+    this.lastfmApiService.getTrackInfo("Lovely Day", "Bill Withers")
+    .subscribe(info => {
+      this.trackInfo = info;
+      console.log("getTrackInfo this.trackInfo: :", this.trackInfo);
+    }, err => {
+      console.log(err);
+    });
+  }
+  
   goBack(): void {
     this.location.back();
   }
