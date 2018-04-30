@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment.local';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 import { Song } from './../../components/songs/songs';
 import { MessageService } from '../messages/message.service';
@@ -32,5 +33,12 @@ export class LastfmApiService {
     return this.http.get(url)
   }
 
-
+  getTrackDetails(name: String) {
+    const trackMatchUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${name}&api_key=${LAST_FM_API_KEY}&format=json`;
+    return this.http.get(trackMatchUrl)
+      .switchMap(trackMatches => {
+        const trackInfoUrl = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LAST_FM_API_KEY}&artist=${trackMatches['results']['trackmatches']['track'][0].artist}&track=${trackMatches['results']['trackmatches']['track'][0].name}&format=json`;
+        return this.http.get(trackInfoUrl)
+      })
+  }
 }

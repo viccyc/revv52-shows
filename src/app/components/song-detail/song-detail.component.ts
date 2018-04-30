@@ -27,17 +27,18 @@ export class SongDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getSong();
-    this.getTrackMatches();
-    this.getTrackInfo();
+    this.getSong();;
+    // this.getTrackMatches() ;
+    // this.getTrackInfo();
+    this.getTrackDetails();
   }
   
-  getSong(): void {
+  getSong() {
     const id = +this.route.snapshot.paramMap.get('id');  //+ converts string to number
     this.songService.getSong(id)
     .subscribe(song => this.song = song);
   }
-  
+
   getTrackMatches() {
     this.lastfmApiService.getTrackMatches(this.song.name)
     .subscribe(matches => {
@@ -59,6 +60,18 @@ export class SongDetailComponent implements OnInit {
     });
   }
   
+  getTrackDetails() {
+    this.lastfmApiService.getTrackDetails(this.song.name)
+    .subscribe(info => {
+      this.trackInfo = info;
+      console.log("trackInfo : ", this.trackInfo);
+      console.log("trackInfo : ", this.trackInfo['track'].url);
+      console.log("trackInfo : ", this.trackInfo['track'].wiki.content);
+    }, err => {
+      console.log(err);
+    });
+  }
+
   goBack(): void {
     this.location.back();
   }
