@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 import { Song } from '../songs/songs';
 import { SongService } from '../../services/song/song.service';
@@ -15,7 +17,8 @@ import { isArray } from 'util';
 })
 export class SongDetailComponent implements OnInit {
   // @Input decorator to make the song property available for binding by the external SongComponent.
-  @Input()song: Song;
+  // @Input()song: Song;
+  @Input()song: any;
   trackMatches: any;
   trackInfo: any;
 
@@ -27,34 +30,33 @@ export class SongDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getSong();;
-    // this.getTrackMatches() ;
-    // this.getTrackInfo();
-    this.getTrackDetails();
+    this.getSong();
   }
-  
+
   getSong() {
     const id = +this.route.snapshot.paramMap.get('id');  //+ converts string to number
     this.songService.getSong(id)
-    .subscribe(song => this.song = song);
+      .map(song => {
+        this.song = song;
+      })
+      .subscribe(song => {
+        this.getTrackDetails();
+      })
   }
 
   getTrackMatches() {
     this.lastfmApiService.getTrackMatches(this.song.name)
     .subscribe(matches => {
       this.trackMatches = matches;
-      console.log("getTrackMatches this.trackMatches: :", this.trackMatches);
     }, err => {
       console.log(err);
     });
   }
 
   getTrackInfo() {
-    // this.lastfmApiService.getTrackInfo(this.trackMatches.name, this.trackMatches.artist)
     this.lastfmApiService.getTrackInfo("Lovely Day", "Bill Withers")
     .subscribe(info => {
       this.trackInfo = info;
-      console.log("getTrackInfo this.trackInfo: :", this.trackInfo);
     }, err => {
       console.log(err);
     });
@@ -64,9 +66,9 @@ export class SongDetailComponent implements OnInit {
     this.lastfmApiService.getTrackDetails(this.song.name)
     .subscribe(info => {
       this.trackInfo = info;
-      console.log("trackInfo : ", this.trackInfo);
-      console.log("trackInfo : ", this.trackInfo['track'].url);
-      console.log("trackInfo : ", this.trackInfo['track'].wiki.content);
+      this.song.url = this.trackInfo['track'].url;
+      this.song.published = this.trackInfo['track'].wiki.published;
+      this.song.image = this.trackInfo['track'].album.image[3]['#text'];
     }, err => {
       console.log(err);
     });

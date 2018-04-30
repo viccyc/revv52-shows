@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment.local';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/map';
 
 import { Song } from './../../components/songs/songs';
 import { MessageService } from '../messages/message.service';

@@ -1,7 +1,7 @@
 <div *ngIf="song">
     <h3>{{ song.name | uppercase }} details:</h3>
     <div>
-      <span>id: </span>{{ song.id }}
+      <img src="{{ song.image }}"/>
     </div>
     <div>
       <label>name:
@@ -9,6 +9,11 @@
       </label>
     </div>
     <div>
+      <a href="{{ song.url }}">{{ song.name }} last.fm details</a>
+    </div>
+    <div>
+      <span>published: </span>{{ song.published }}
+    </div>   <div>
       <button (click)="goBack()">go back</button>
       <button (click)="save()">save</button>
     </div>

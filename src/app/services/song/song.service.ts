@@ -43,12 +43,9 @@ export class SongService {
       );
   }
 
-  getSong(id: number): Observable<Song> {
+  getSong(id: number) {
     const url = `${this.songsUrl}/${id}`;
-    return this.http.get<Song>(url).pipe(
-      tap(_ => this.log(`fetched song id=${id}`)),
-      catchError(this.handleError<Song>(`getSong id=${id}`))
-    );
+    return this.http.get(url);
   }
 
   updateSong (song: Song): Observable<any> {

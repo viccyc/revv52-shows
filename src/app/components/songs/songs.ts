@@ -1,4 +1,7 @@
 export class Song {
   id: number;
-  name:  string;    
+  name:  string;  
+  url: string;
+  published: string;  
+  image: string;
 }
