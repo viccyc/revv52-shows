@@ -4,16 +4,23 @@
       <img src="{{ song.image }}"/>
     </div>
     <div>
-      <label>name:
+      <span>Artist: </span>{{ song.artist }}
+    </div> 
+    <div>
+      <label>Track name:
         <input [(ngModel)]="song.name" placeholder="name">
       </label>
     </div>
     <div>
-      <a href="{{ song.url }}">{{ song.name }} last.fm details</a>
+      <span>Album name: </span>{{ song.album }}
     </div>
     <div>
+      <a href="{{ song.url }}">{{ song.name }} last.fm details</a>
+    </div>
+    <div *ngIf="song.published">
       <span>published: </span>{{ song.published }}
-    </div>   <div>
+    </div>   
+    <div>
       <button (click)="goBack()">go back</button>
       <button (click)="save()">save</button>
     </div>

@@ -67,8 +67,12 @@ export class SongDetailComponent implements OnInit {
     .subscribe(info => {
       this.trackInfo = info;
       this.song.url = this.trackInfo['track'].url;
-      this.song.published = this.trackInfo['track'].wiki.published;
+      this.song.artist = this.trackInfo['track'].artist.name;
+      // some of them don't have images so they get the default
+      this.song.image = '../../assets/default_song.jpg';
       this.song.image = this.trackInfo['track'].album.image[3]['#text'];
+      this.song.published = this.trackInfo['track'].wiki.published;
+      this.song.album = this.trackInfo['track'].album.title;
     }, err => {
       console.log(err);
     });
