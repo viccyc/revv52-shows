@@ -38,4 +38,17 @@ export class SongsComponent implements OnInit {
     this.songs = this.songs.filter(s => s !== song);
     this.songService.deleteSong(song).subscribe();
   }
+
+  addToDashboard(song): void {
+    this.songService.addToDashboard(song);
+    // console.log("dashboard component addToDashboard songs: ", this.songs);
+    // console.log("dashboard component addToDashboard song: ", song);
+    // this.songs.push(song);
+  }
+  // addToDashboard(song: Song): void {
+  //   console.log("song component addToDashboard song: ", song);
+  //   // this.dashboardComponent.updateSongs(song);
+  //   // this.songService.addToDashboard(song);
+  // }
+
 }

@@ -8,17 +8,23 @@ import { SongService } from '../../services/song/song.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  songs: Song[] = [];
+  dashboardSongs: Song[] = [];
 
   constructor(private songService: SongService) { }
 
   ngOnInit() {
-    this.getSongs();
+    this.getDashboardSongs();
   }
 
-  getSongs(): void {
-    this.songService.getSongs()
-        .subscribe(songs => this.songs = songs.slice(3, 7));
+  getDashboardSongs(): void {
+    this.dashboardSongs = this.songService.getDashboardSongs()
+  }
+
+  addToDashboard(song): void {
+    // this.songService.addToDashboard(song);
+    console.log("dashboard component addToDashboard songs: ", this.songService.getSongs());
+    // console.log("dashboard component addToDashboard song: ", song);
+    // this.songs.push(song);
   }
 
 }

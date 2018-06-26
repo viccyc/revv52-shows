@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Song } from '../../components/songs/songs';
+import { DashboardComponent } from '../../components/dashboard/dashboard.component';
 
 import { MessageService } from '../messages/message.service';
 
@@ -14,7 +15,9 @@ const httpOptions = {
 
 @Injectable()
 export class SongService {
-  
+  songs: Song[] = [];
+  dashboardSongs: Song[] = [];
+
   // typical "service-in-service" scenario: you inject the MessageService into the SongService which is injected into the SongComponent.
   constructor(
     private http: HttpClient,
@@ -70,6 +73,16 @@ export class SongService {
       tap(_ => this.log(`deleted song id=${id}`)),
       catchError(this.handleError<Song>(`deletedSong`))
     );
+  }
+
+  addToDashboard (song: Song) {
+    this.dashboardSongs.push(song);
+    console.log("song service addToDashboard this.dashboardSongs: ", this.dashboardSongs);
+    // console.log("song service Dashboard component songs: ", DashboardComponent.songs);
+  }
+
+  getDashboardSongs() {
+    return this.dashboardSongs;
   }
 
   searchSongs(term: string): Observable<Song[]> {
