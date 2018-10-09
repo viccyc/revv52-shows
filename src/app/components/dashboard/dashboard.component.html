@@ -1,11 +1,18 @@
 <h3>Top Songs</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let song of songs" class="col-1-4"
-      routerLink="/detail/{{ song.id }}">
-    <div class="module song">
-      <h4>{{ song.name }}</h4>
-    </div>
-  </a>
-</div>
+  <div class="grid grid-pad" layout = "row" width = 100%>
+    <a *ngFor="let song of dashboardSongs" class="col-1-4"
+        routerLink="/detail/{{ song.id }}">
+      <div class="module song">
+        <h4>{{ song.name }}</h4>
+        <button class="deleteDashSong" title="delete from Dashboard"
+        (click)="deleteFromDashboard(song, routerLink)"
+        >x</button>
+      </div>
+      <div>
+      </div>
+    </a>
+  </div>
 
-<song-search></song-search>
+<div width = 100%>
+  <song-search></song-search>
+</div>

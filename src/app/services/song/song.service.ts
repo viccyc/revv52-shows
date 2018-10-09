@@ -77,8 +77,14 @@ export class SongService {
 
   addToDashboard (song: Song) {
     this.dashboardSongs.push(song);
-    console.log("song service addToDashboard this.dashboardSongs: ", this.dashboardSongs);
     // console.log("song service Dashboard component songs: ", DashboardComponent.songs);
+  }
+
+  deleteFromDashboard (song: Song) {
+    const id = typeof song === 'number' ? song : song.id;
+    this.dashboardSongs = this.dashboardSongs.filter(function(obj) {
+      return obj.id !== id;
+    });
   }
 
   getDashboardSongs() {

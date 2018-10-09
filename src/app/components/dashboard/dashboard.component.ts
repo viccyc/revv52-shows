@@ -27,4 +27,10 @@ export class DashboardComponent implements OnInit {
     // this.songs.push(song);
   }
 
+  deleteFromDashboard(song, routerLink): void {
+    console.log('routerLink: ', routerLink);
+    routerLink.preventDefault();
+    this.songService.deleteFromDashboard(song);
+  }
+
 }
