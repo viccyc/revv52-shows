@@ -28,8 +28,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteFromDashboard(song, routerLink): void {
-    console.log('routerLink: ', routerLink);
-    routerLink.preventDefault();
     this.songService.deleteFromDashboard(song);
   }
 
